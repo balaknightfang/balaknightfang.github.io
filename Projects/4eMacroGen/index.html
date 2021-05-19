@@ -1,0 +1,75 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>4e Macro Generation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/style.css" />
+    <script src="main.js"></script>
+</head>
+<body>
+    <div id="content" class="container">
+    <form onsubmit="macroPrint(); return false">
+        <label for="powerNumber">Power Number:</label>
+        <input type="number" id="powerNumber" min="1" max="100" value="1"></input>
+        <br>
+        <p>Power Type:</p>
+        <input type="radio" id="atwill" name="powerType" value="atwill" checked>
+        <label for="atwill">atwill</label>
+        <input type="radio" id="encounter" name="powerType" value="encounter" >
+        <label for="encounter">encounter</label>
+        <input type="radio" id="daily" name="powerType" value="daily" >
+        <label for="daily">daily</label>
+        <input type="radio" id="item" name="powerType" value="item" >
+        <label for="item">item</label>
+        <input type="radio" id="other" name="powerType" value="other" >
+        <label for="other">other</label>
+        <input type="radio" id="ability" name="powerType" value="ability" >
+        <label for="ability">ability</label>
+        <input type="radio" id="skill" name="powerType" value="skill" >
+        <label for="skill">skill</label>
+        <br>
+        <label for="emoteText">Emote Text:</label>
+        <input type="text" id=emoteText placeholder="**@{character_name}** italics fluff text."></input> 
+        <br>
+        <label for="name">Ability Name:</label>
+        <input type="text" id=name placeholder="Basic Melee"></input> 
+        <br>
+        <label for="keywords">Keywords:</label>
+        <input type="text" id=keywords placeholder="Weapon"></input> 
+
+        <!--<p>Power Action:</p>
+        <input type="radio" id="standard" name="powerAction" value="standard" checked>
+        <label for="standard">standard</label>
+        <input type="radio" id="move" name="powerAction" value="move" >
+        <label for="move">move</label>
+        <input type="radio" id="freeAction" name="powerAction" value="freeAction" >
+        <label for="freeAction">freeAction</label>
+        <input type="radio" id="noAction" name="powerAction" value="noAction" >
+        <label for="noAction">noAction</label>
+        <input type="radio" id="immediate" name="powerAction" value="immediate" >
+        <label for="immediate">immediate</label>
+        <input type="radio" id="immediateInterrupt" name="powerAction" value="immediateInterrupt" >
+        <label for="immediateInterrupt">immediateInterrupt</label>
+        <input type="radio" id="immediateReaction" name="powerAction" value="immediateReaction" >
+        <label for="immediateReaction">immediateReaction</label>
+        <input type="radio" id="opportunityAttack" name="powerAction" value="opportunityAttack" >
+        <label for="opportunityAttack">opportunityAttack</label>-->
+        <br>
+        <label for="target">Target:</label>
+        <input type="text" id=target placeholder="One Creature"></input> 
+        <br>
+        <label for="special">Special:</label>
+        <input type="text" id=special placeholder="I can use an unarmed attack as a weapon to make a melee basic attack."></input> 
+        <br>
+        <input type="submit"></input>
+    </form>
+    </div>
+    <div id="output" class="container" style="border-style:solid">
+        <code id="finalMacro" style="color:blue; background-color:white">
+                
+        </code>
+    </div>
+</body>

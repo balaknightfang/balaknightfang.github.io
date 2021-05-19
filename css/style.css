@@ -1,0 +1,104 @@
+#menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: blue;
+    overflow: hidden;
+    
+}
+
+li a:hover {
+    background-color: lightblue;
+}
+
+.top{
+    float: left;
+    border-right: 1px solid navy;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px 16px;
+
+}
+li a:visited {
+    color: black;
+}
+
+hr {
+    border-color: dimgray;
+    margin: 5px, 3px; 
+    width: 75%;
+}
+
+code {
+    font: Helvetica;
+    text-decoration: underline;
+    background-color: lightgray;
+}
+
+.caption {
+    width: 50%;
+    font-style: italic;
+}
+
+#most_important {
+    background: grey;
+    width: 200px;
+    height: 100px;
+}
+
+blockquote {
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 40px;
+    margin-right: 40px;
+
+    border-style: solid;
+    border-radius: 10px;
+    border-width: thin;
+    background: lightgrey;
+    padding: 10px 10px;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+}
+
+h3 {
+    font-size: large;
+}
+
+a:focus {
+    font-weight: bold;
+}
+
+a:visited {
+    color: purple;
+}
+
+@media screen and (min-width: 25em) {
+    #nav {
+      float: none;
+      width: auto;
+    }
+    #main {
+      margin-left: 0;
+    }
+}
+
+@media screen and (min-width: 43em) {
+    #nav {
+      float: left;
+      width: 24%;
+    }
+    #main {
+      margin-left: 27%;
+    }
+}
