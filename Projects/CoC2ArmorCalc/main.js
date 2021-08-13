@@ -10,4 +10,14 @@ const armorPrint = () => {
     
 }
 
+const resPrint = () => {
+    let damageReduction = Number(document.getElementById("resValue").value);
+    let macro2 = `Armor Needed: ${(10000/(100-damageReduction) - 100).toFixed(0)}`;
+
+    
+    document.getElementById("armorNeeded").innerHTML = macro2;
+
+    
+}
+
 //${document.querySelector('input[name="powerAction"]:checked').value}
