@@ -1,0 +1,69 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Champions Online EHP Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../../css/style.css" />
+    <script src="main.js"></script>
+</head>
+<body>
+    <div id="content" class="container">
+    <h1>For Defense Tanks:</h1>
+    <form onsubmit="armorPrint(); return false;">
+        <label for="armorValue">Defense Value (as on character sheet):</label>
+        <input type="number" id="armorValue" min="1" max="5000" value="100"></input><br>
+        <label for="brill">Brilliance Mod?</label>
+        <input type="checkbox" id="brill" name="brill" value="Brill"><br>
+        <label for="baseHP">HP:</label>
+        <input type="number" id="baseHP" min="1" max="50000" value="10000"></input>
+        <label for="PSS">Primary Super Stat:</label>
+        <input type="number" id="PSS" min="1" max="2000" value="100"></input>
+        <label for="SSSS">Secondary Super Stats Summed:</label>
+        <input type="number" id="SSSS" min="1" max="2000" value="100"></input>
+        <p>Passive (R3 Assumed):
+        <input type="radio" id="defiance" name="passive" value="defiance">
+        <label for="atwill">Defiance</label>
+        <input type="radio" id="invuln" name="passive" value="invuln" >
+        <label for="encounter">Invulnerability</label>
+        <input type="radio" id="none" name="passive" value="none" >
+        <label for="none">None</label></p>
+
+        <br>
+        <br>
+        <input type="submit"></input>
+    </form>
+    </div>
+    <div id="output" class="container" style="border-style:solid">
+        <code id="tankEHP" style="color:blue; background-color:white">
+                
+        </code>
+        
+    </div>
+
+    <div id="content2" class="container">
+        <h1>For Dodge Tanks:</h1>
+
+        <form onsubmit="resPrint(); return false;">
+            <label for="armorValue2">Defense Value (as on character sheet):</label>
+            <input type="number" id="armorValue2" min="1" max="5000" value="1"></input> <br>
+            <label for="brill2">Brilliance Mod?</label>
+            <input type="checkbox" id="brill2" name="brill2" value="Brill"><br>
+            <label for="avoid">Avoidance%:</label>
+            <input type="number" id="avoid" min="1" max="99" value="50"></input><br>
+            <label for="baseHP2">HP:</label>
+            <input type="number" id="baseHP2" min="1" max="50000" value="10000"></input>
+            <br>
+            <br>
+            <input type="submit"></input>
+        </form>
+        </div>
+        <div id="output2" class="container" style="border-style:solid">
+            <code id="dodgeEHP" style="color:blue; background-color:white">
+                    
+            </code>
+            
+        </div>
+</body>
