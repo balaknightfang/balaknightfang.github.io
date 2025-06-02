@@ -1,11 +1,14 @@
 .sidenav {
-    width:10%;
+    width:12%;
+    min-width: 100px;
     position:fixed;
     z-index:1;
     top:0;
     left:0;
+    bottom:0;
     overflow-x:hidden;
     border: 1px solid black;
+    overflow-y: scroll;
 }
 .sidenav a {
     padding: 5px 8px 5px 8px;
@@ -22,6 +25,10 @@
   
   /* Style page content */
 #page-content-wrapper {
-    margin-left: 10%; /* Same as the width of the sidebar */
+    margin-left: max(100px, 12%); /* Same as the width of the sidebar */
     padding: 0px 10px;
 }
+
+@media screen and (max-height: 450px) {
+    .sidenav a {font-size: 10px;}
+  }
