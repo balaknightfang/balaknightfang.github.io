@@ -10,10 +10,38 @@ Aesica.dataHarness.buildLookupTables();
 let Titles = [];
 let Headers = [];
 
+const frameworksList = [
+    "Electricity",
+	"Fire",
+	"Force",
+	"Wind",
+	"Ice",
+	"Archery",
+	"Gadgeteering",
+	"Munitions",
+	"Power Armor",
+	"Laser Sword",
+	"Dual Blades",
+	"Fighting Claws",
+	"Single Blade",
+	"Unarmed",
+	"Telekinesis",
+	"Telepathy",
+	"Heavy Weapons",
+	"Earth",
+	"Might",
+	"Celstial",
+	"Darkness",
+	"Arcane Sorcery",
+	"Bestial",
+	"Infernal"
+];
+
 const title = (text) => {
     const title = text?.replace(/[^a-zA-Z1-9]/g, '');
     if(Titles.filter(e=>e.title === title).length === 0) Titles.push({ title, text });
     return `<br><h1 id="${title}" >${text}</h1><hr>`;
+
 };
 const header = (text) => {
     const header = text?.replace(/[^a-zA-Z1-9]/g, '');
@@ -32,49 +60,6 @@ const list = (entries, ordered = false) => {
     return `<${tag}>${entries.map(_=>`<li>${_}</li>`).join('')}</${tag}>`;
 };
 
-//const powerTypes = ["At-Will", "Recharge", "Encounter", "Ultimate"];
-const damageTypes = [
-    "Raw",
-    "Penetrating",
-    "Crushing",
-    "Holy",
-    "Blight",
-    "Acid",
-    "Fire",
-    "Frost",
-    "Storm",
-    "Tease",
-    "Drug",
-    "Pheromone",
-    "Fatigue",
-    "Mind",
-];
-const attackTypes = ["Physical","Magical","Mental","Sexual"];
-const itemTags = [
-    "WEAPON",
-    "MELEE",
-    "RANGED",
-    "THROWN",
-    "SPELL",
-    "STANCE",
-    "SUMMON",
-    "HEALING",
-    "ALLY",
-    "OMNI",
-    "PERFORMANCE",
-    "TEASE",
-    "TEASE_ASS",
-    "TEASE_CROTCH",
-    "TEASE_CHEST",
-    "CATALYZABLE",
-    "DUALWIELD",
-    "TWOHAND",
-    "MULTITURN",
-    "INTERRUPTABLE",
-    "SHIELD",
-    "STEALABLE",
-    "RES_HEAL"
-];
 const sortItems = (item1, item2) => {
     if(item1 === undefined) return 0;
     else if (item2 === undefined) return 0;
@@ -106,7 +91,7 @@ class searchOptions {
     render() {
     
         return          
-            `<div className=searchStuff>
+            `<div class=searchStuff>
                 <label for="ItemNameSearch">Name:</label>
                 <br></br>
                 <input class="searchFields" type="text" id="ItemNameSearch" name="ItemNameSearch" onKeyDown=pressedEnter()></input>
@@ -134,7 +119,7 @@ class searchOptions {
 
 
 function sidebarEntries() {
-    return Titles.map((title) => `<SideBarEntry key=${title.title} title=${title}/>`);
+    return Titles.reduce((bar, title) => bar += `<li><a href="#${title.title}">${title.text}</a></li>`, ``);
 }
 
 
@@ -209,20 +194,17 @@ function fieldOrSpinner(obj, field) {
 const actualOutputList = (array) => {
     let rValue = "";
     let currentCat = 0;
-    console.log(array);
     let pows =  JSON.parse(JSON.stringify(array))
     const done = [];
     array/*.sort(sortItems)*/.forEach(x => {
+        if(x["name"] === "null" || x["name"] === null) return;
         let pow = pows.filter(p => stringOrFunc(p.name) == x["name"])
         if(pow.length > 1) pow = pow.filter(p=> p.constructor.name !== "_class2")
-        //console.log(pow)
-        //console.log(x);
-        //console.log(stringOrFunc(x["name"]))
-        //if(x["type"] === undefined || x["name"] === undefined || ["Unnamed", "Tease", "Attack"].includes(x["name"]) || done.includes(x["name"])) {return; }
-        /*if(currentCat !== dataFramework[x.framework]?.name) {
-            currentCat = dataFramework[x.framework]?.name;
-            rValue += "" + currentCat;
-        }*/
+        if(currentCat !== parseInt(x["framework"])) {
+            currentCat = parseInt(x["framework"]);
+            let ti = frameworksList[currentCat - 1];
+            rValue += "" + title(ti) ;
+        }
         delete x["type"];
         rValue += "<br>" + header(stringOrFunc(x["name"]));
         
@@ -231,12 +213,12 @@ const actualOutputList = (array) => {
         entry.push("<b>Name:</b> " + fieldOrSpinner(x, 'name'));
         done.push(fieldOrSpinner(x, 'name'))
         for (const key in x) {
-            if(x[key] && key !== "combatUsePower" && key !== "consumeOnPower" && !key.includes("stack") && key !== "getKey" && key !== "advantageList") {
-                entry.push(`<b>li${key}</b>: ${fieldOrSpinner(x,key)}`);
+            if(x[key] && key !== "combatUsePower" && key !== "consumeOnPower" && !key.includes("stack") && key !== "getKey" && key !== "advantageList" && key !== "liid") {
+                entry.push(`<b>${key}</b>: ${fieldOrSpinner(x,key)}`);
             }
         }
         let advantages = "<ol><h3>Advantages:</h3>";
-        x["advantageList"].forEach(adv => advantages +=`<li><b>${adv.name}</b>: Desc: ${adv.toolTip}</li>`)
+        x["advantageList"].forEach(adv => advantages += ((adv.name !== null) ? `<li><b>${adv.name}</b>: Desc: ${adv.toolTip}</li>` : ``));
         advantages += "</ol>"
         entry.push(advantages)
         rValue += list(entry);
@@ -259,25 +241,26 @@ function render() {
     
 
     document.getElementById("root").innerHTML=
-    `<div className="d-flex" id="wrapper">
+    `<div class="d-flex" id="wrapper">
            
-           <div className="border-right" id="sidebar-wrapper">
-                <div className="list-group list-group-flush">
-                    ${_sidebarEntries}
+           <div class="sidenav">
+                    <ul>
+                        ${_sidebarEntries}
+                    </ul>
                 </div>
             </div>
 
-          <div id="page-content-wrapper">
+          <div id="page-content-wrapper"">
             
-                <nav className="navbar navbar-expand-lg navbar-light border-bottom" id="nav-bar" >
+                <nav class="navbar navbar-expand-lg navbar-light border-bottom" id="nav-bar" >
                 </nav>
             
-                <div className="container-fluid">
-                    ${jsonGen()}
+                <div class="container-fluid">
+                    ${items}
                 </div>
             </div>
-            <div className="d-flex" id="searchbar-wrapper">
-            <div className="border-left">
+            <div class="d-flex" id="searchbar-wrapper">
+            <div class="border-left">
             <!--{search}<br/>-->
             <!--    <button id="searchButt" onClick={searchFun}>Search</button>-->
             </div>
